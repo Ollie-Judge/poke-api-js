@@ -1,12 +1,27 @@
-const originalPokemonUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+const PokemonUrl = "https://pokeapi.co/api/v2/pokemon/";
+
+const originalPokemonUrl = "?limit=150";
 
 const loadPokemonButton = document.getElementById("loadPokemonButton");
 const pokemonOutputContainer = document.getElementById(
   "pokemonOutputContainer"
 );
 
-const loadPokemon = () => {
-  fetch(originalPokemonUrl)
+const searchByName = () => {
+  const pokemonNameSearch = document
+    .getElementById("pokemonNameSearch")
+    .value.toLowerCase();
+  const url = PokemonUrl + pokemonNameSearch;
+  loadPokemon(url);
+};
+
+const searchOriginalPokemon = () => {
+  const url = PokemonUrl + originalPokemonUrl;
+  loadPokemon(url);
+};
+
+const loadPokemon = (url) => {
+  fetch(url)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -15,14 +30,39 @@ const loadPokemon = () => {
     })
     .then((data) => {
       console.log(data);
-      outputPokemon(data);
+      if (data.results) {
+        outputMultiplePokemon(data);
+      } else {
+        outputSinglePokemon(data);
+      }
     })
     .catch((error) => {
       console.error("Error:", error);
     });
 };
 
-const outputPokemon = (data) => {
+const outputSinglePokemon = (data) => {
+  const pokemonCard = document.createElement("div");
+  pokemonCard.className = "pokemonCard";
+
+  const imageContainer = document.createElement("div");
+  const pokemonImage = document.createElement("img");
+
+  pokemonImage.src = data.sprites.back_default;
+
+  const nameContainer = document.createElement("div");
+  nameContainer.innerHTML = data.name;
+
+  pokemonOutputContainer.appendChild(pokemonCard);
+
+  pokemonOutputContainer.appendChild(imageContainer);
+  pokemonCard.appendChild(imageContainer);
+  imageContainer.appendChild(pokemonImage);
+
+  pokemonCard.appendChild(nameContainer);
+};
+
+const outputMultiplePokemon = (data) => {
   data.results.forEach((pokemon) => {
     const pokemonCard = document.createElement("div");
     pokemonCard.className = "pokemonCard";
@@ -43,5 +83,4 @@ const outputPokemon = (data) => {
 
     pokemonCard.appendChild(nameContainer);
   });
-  console.log(data.results[0]);
 };
