@@ -12,7 +12,14 @@
   margin: 25px auto;
 }
 
-.pokemonCard {
+.orignalPokemonCard {
+  margin: 25px auto;
+  border: 1px solid black;
+  width: 25%;
+  padding: 25px;
+}
+
+.singularPokemonCard {
   margin: 25px auto;
   border: 1px solid black;
   width: 25%;

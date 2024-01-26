@@ -7,6 +7,10 @@ const pokemonOutputContainer = document.getElementById(
   "pokemonOutputContainer"
 );
 
+const refreshPage = () => {
+  location.reload();
+};
+
 const searchByName = () => {
   const pokemonNameSearch = document
     .getElementById("pokemonNameSearch")
@@ -43,7 +47,7 @@ const loadPokemon = (url) => {
 
 const outputSinglePokemon = (data) => {
   const pokemonCard = document.createElement("div");
-  pokemonCard.className = "pokemonCard";
+  pokemonCard.className = "singularPokemonCard";
 
   const imageContainer = document.createElement("div");
   const pokemonImage = document.createElement("img");
@@ -65,7 +69,7 @@ const outputSinglePokemon = (data) => {
 const outputMultiplePokemon = (data) => {
   data.results.forEach((pokemon) => {
     const pokemonCard = document.createElement("div");
-    pokemonCard.className = "pokemonCard";
+    pokemonCard.className = "orignalPokemonCard";
 
     const imageContainer = document.createElement("div");
     const pokemonImage = document.createElement("img");
