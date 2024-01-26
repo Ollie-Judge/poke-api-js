@@ -1,4 +1,4 @@
-const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=20";
+const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
 const loadPokemonButton = document.getElementById("loadPokemonButton");
 const pokemonOutputContainer = document.getElementById(
@@ -25,9 +25,24 @@ loadPokemonButton.addEventListener(
 
 const outputPokemon = (data) => {
   data.results.forEach((pokemon) => {
-    let item = document.createElement("div");
-    item.innerHTML = pokemon.name;
-    pokemonOutputContainer.appendChild(item);
+    const pokemonCard = document.createElement("div");
+    pokemonCard.className = "pokemonCard";
+
+    const imageContainer = document.createElement("div");
+    const pokemonImage = document.createElement("img");
+
+    pokemonImage.src = pokemon.url;
+
+    const nameContainer = document.createElement("div");
+    nameContainer.innerHTML = pokemon.name;
+
+    pokemonOutputContainer.appendChild(pokemonCard);
+
+    pokemonOutputContainer.appendChild(imageContainer);
+    pokemonCard.appendChild(imageContainer);
+    imageContainer.appendChild(pokemonImage);
+
+    pokemonCard.appendChild(nameContainer);
   });
-  console.log(data);
+  console.log(data.results[0]);
 };
