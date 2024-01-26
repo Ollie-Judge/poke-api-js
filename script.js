@@ -1,13 +1,12 @@
-const apiUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
+const originalPokemonUrl = "https://pokeapi.co/api/v2/pokemon/?limit=150";
 
 const loadPokemonButton = document.getElementById("loadPokemonButton");
 const pokemonOutputContainer = document.getElementById(
   "pokemonOutputContainer"
 );
 
-loadPokemonButton.addEventListener(
-  "click",
-  fetch(apiUrl)
+const loadPokemon = () => {
+  fetch(originalPokemonUrl)
     .then((response) => {
       if (!response.ok) {
         throw new Error("Network response was not ok");
@@ -20,8 +19,8 @@ loadPokemonButton.addEventListener(
     })
     .catch((error) => {
       console.error("Error:", error);
-    })
-);
+    });
+};
 
 const outputPokemon = (data) => {
   data.results.forEach((pokemon) => {
