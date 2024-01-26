@@ -1,0 +1,13 @@
+* {
+  padding: 0;
+  margin: 0;
+  text-align: center;
+}
+
+#header {
+  margin: 25px auto;
+}
+
+#footer {
+  margin: 25px auto;
+}
